@@ -1,0 +1,7 @@
+import eu.pierrebeitz.Album
+
+model {
+	Album album
+}
+
+json g.render(album, [resolveTemplate: false])
