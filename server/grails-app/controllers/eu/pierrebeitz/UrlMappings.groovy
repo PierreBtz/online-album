@@ -3,14 +3,16 @@ package eu.pierrebeitz
 class UrlMappings {
 
     static mappings = {
-        delete "/$controller/$id(.$format)?"(action:"delete")
-        get "/$controller(.$format)?"(action:"index")
-        get "/$controller/$id(.$format)?"(action:"show")
-        post "/$controller(.$format)?"(action:"save")
-        put "/$controller/$id(.$format)?"(action:"update")
-        patch "/$controller/$id(.$format)?"(action:"patch")
 
-        "/"(controller: 'application', action:'index')
+        "/$controller/$action?/$id?"{
+            // apply constraints here
+        }
+
+        "/items/$id?" (controller: "item") {
+            action = [GET:'show', POST:'upload']
+        }
+
+        "/"(view:"/index")
         "500"(view: '/error')
         "404"(view: '/notFound')
     }

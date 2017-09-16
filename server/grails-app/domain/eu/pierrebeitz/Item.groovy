@@ -3,15 +3,24 @@ package eu.pierrebeitz
 class Item {
 
     String name
-    byte[] image
-    String contentType
+    Image image
+
+    static embedded = ['image']
 
     static constraints = {
+        name nullable: true
         image nullable: true
-        contentType nullable: true
+    }
+}
+
+class Image {
+    byte[] byteImage
+
+    static constraints = {
+        byteImage maxSize: 1024 * 1024
     }
 
     static mapping = {
-        image column: 'image', sqlType: 'longblob'
+        byteImage column: 'byteImage', sqlType: 'longblob'
     }
 }

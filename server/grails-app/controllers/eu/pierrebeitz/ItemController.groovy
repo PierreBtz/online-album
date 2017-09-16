@@ -1,64 +1,51 @@
 package eu.pierrebeitz
 
-import grails.validation.ValidationException
-import static org.springframework.http.HttpStatus.*
+import grails.rest.RestfulController
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 
-class ItemController {
+import javax.servlet.http.HttpServletResponse
+
+class ItemController extends RestfulController {
 
     ItemService itemService
 
-    static responseFormats = ['json', 'xml']
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static responseFormats = ['json']
+    static allowedMethods = [upload: "POST"]
+
+    ItemController() {
+        super(Item)
+    }
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond itemService.list(params), model:[itemCount: itemService.count()]
+        respond itemService.list(params), model: [itemCount: itemService.count()]
     }
 
     def show(Long id) {
         respond itemService.get(id)
     }
 
-    def save(Item item) {
-        if (item == null) {
-            render status: NOT_FOUND
-            return
-        }
+    def upload() {
+        def multiPartFile = params.byteImage
+        def contentType = multiPartFile.contentType
+        if (checkValidContentType(contentType)) {
+            def image = new Image(params)
+            Item newItem = itemService.save(new Item(name: params.get('name'), image: image))
 
-        try {
-            itemService.save(item)
-        } catch (ValidationException e) {
-            respond item.errors, view:'create'
-            return
+            response.setStatus(HttpServletResponse.SC_CREATED)
+            response.setHeader('Location', ServletUriComponentsBuilder
+                    .fromCurrentRequest()
+                    .path("/${newItem.id}")
+                    .build()
+                    .toUri().toString())
+            respond newItem
+        } else {
+            response.sendError(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE, 'Server only accepts png and jpeg images')
         }
-
-        respond item, [status: CREATED, view:"show"]
     }
 
-    def update(Item item) {
-        if (item == null) {
-            render status: NOT_FOUND
-            return
-        }
-
-        try {
-            itemService.save(item)
-        } catch (ValidationException e) {
-            respond item.errors, view:'edit'
-            return
-        }
-
-        respond item, [status: OK, view:"show"]
+    private boolean checkValidContentType(contentType) {
+        contentType == 'image/png' || contentType == 'image/jpeg'
     }
 
-    def delete(Long id) {
-        if (id == null) {
-            render status: NOT_FOUND
-            return
-        }
-
-        itemService.delete(id)
-
-        render status: NO_CONTENT
-    }
 }
