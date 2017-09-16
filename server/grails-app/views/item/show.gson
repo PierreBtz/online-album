@@ -1,7 +1,7 @@
 import eu.pierrebeitz.Item
 
 model {
-	Item item
+	Iterable<Item> itemList
 }
 
-json tmpl.item(item)
+json tmpl.item(itemList ?: [])

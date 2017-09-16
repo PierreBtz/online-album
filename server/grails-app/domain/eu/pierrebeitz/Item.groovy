@@ -2,14 +2,15 @@ package eu.pierrebeitz
 
 class Item {
 
+    Album album
     String name
     Image image
 
     static embedded = ['image']
 
     static constraints = {
-        name nullable: true
         image nullable: true
+        name unique: true
     }
 }
 
