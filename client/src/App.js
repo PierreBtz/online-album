@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import AlbumList from './AlbumList'
+import AddButton from './AddButton'
 import {SERVER_URL} from './config';
 import 'whatwg-fetch';
 
@@ -23,6 +24,7 @@ class App extends Component {
         return (
             <div>
                 <AlbumList albums={this.state.albums}/>
+                <AddButton/>
             </div>
         );
     }
