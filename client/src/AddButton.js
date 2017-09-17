@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {withStyles} from 'material-ui/styles';
 import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
+import {Link} from 'react-router-dom'
 
 class AddButton extends Component {
 
@@ -10,9 +11,9 @@ class AddButton extends Component {
         const classes = this.props.classes;
         return (
             <div>
-                <Button fab color="primary" aria-label="add" className={classes.button}>
+                <Link to="/add"><Button fab color="primary" aria-label="add" className={classes.button}>
                     <AddIcon/>
-                </Button>
+                </Button></Link>
             </div>);
     }
 }
@@ -23,7 +24,7 @@ AddButton.propTypes = {
 
 const styles = theme => ({
     button: {
-        margin: theme.spacing.unit,
+        margin: theme.spacing.unit
     },
 });
 
