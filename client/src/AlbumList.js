@@ -17,7 +17,7 @@ class AlbumList extends Component {
         let rows = [];
         albums.forEach(album => {
             rows.push(
-                <ListItem button>
+                <ListItem button key={album.name}>
                     <Avatar>
                         <FolderIcon/>
                     </Avatar>
@@ -36,7 +36,7 @@ class AlbumList extends Component {
 
 AlbumList.propTypes = {
     classes: PropTypes.object.isRequired,
-    albums: PropTypes.object.isRequired
+    albums: PropTypes.array.isRequired
 };
 
 const styles = theme => ({
