@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import App from './App';
 import AddAlbum from './AddAlbum';
+import Album from './Album';
 
 import {
     BrowserRouter as Router,
@@ -18,6 +19,7 @@ ReactDOM.render(
         <div>
             <Route exact path="/" component={App}/>
             <Route path="/add" component={AddAlbum}/>
+            <Route path="/album" component={Album}/>
         </div>
     </Router>,
     document.getElementById('root')

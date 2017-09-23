@@ -5,10 +5,20 @@ import List, {ListItem, ListItemText} from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import FolderIcon from 'material-ui-icons/Folder';
 
+import {withRouter} from 'react-router-dom'
+
+
 class AlbumList extends Component {
 
     constructor() {
         super();
+        this.handleClick.bind(this);
+    }
+
+    handleClick(event, key) {
+        console.log(key);
+        this.props.history.push(`/album?id=${key}`)
+        event.preventDefault();
     }
 
     render() {
@@ -17,7 +27,7 @@ class AlbumList extends Component {
         let rows = [];
         albums.forEach(album => {
             rows.push(
-                <ListItem button key={album.name}>
+                <ListItem button key={album.name} onClick={event => this.handleClick(event, album.name)}>
                     <Avatar>
                         <FolderIcon/>
                     </Avatar>
@@ -47,4 +57,4 @@ const styles = theme => ({
     },
 });
 
-export default withStyles(styles)(AlbumList);
+export default withStyles(styles)(withRouter(AlbumList));
