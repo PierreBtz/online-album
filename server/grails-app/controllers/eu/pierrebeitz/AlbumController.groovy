@@ -10,7 +10,7 @@ import static org.springframework.http.HttpStatus.*
 
 class AlbumController extends RestfulController {
 
-    private static final int DEFAULT_LIMIT = 10
+    private static final int DEFAULT_LIMIT = 100
     AlbumService albumService
 
     static responseFormats = ['json', 'xml']
@@ -21,7 +21,7 @@ class AlbumController extends RestfulController {
     }
 
     def index(Integer max) {
-        params.max = Math.min(max ?: DEFAULT_LIMIT, 100)
+        params.max = max ?: DEFAULT_LIMIT
         respond albumService.list(params)
     }
 
