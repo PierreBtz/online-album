@@ -23,8 +23,15 @@ AddButton.propTypes = {
 };
 
 const styles = theme => ({
+    // using the styles found here:
+    // https://stackoverflow.com/questions/35828991/make-material-ui-reactjs-floatingactionbutton-float
     button: {
-        margin: theme.spacing.unit
+        margin: 0,
+        top: 'auto',
+        right: 20,
+        bottom: 20,
+        left: 'auto',
+        position: 'fixed',
     },
 });
 
