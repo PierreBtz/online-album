@@ -1,7 +1,0 @@
-import eu.pierrebeitz.Album
-
-model {
-	Iterable<Album> albumList
-}
-
-json tmpl.album(albumList ?: [])

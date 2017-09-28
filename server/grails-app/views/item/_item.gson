@@ -1,7 +1,0 @@
-import eu.pierrebeitz.Item
-
-model {
-	Item item
-}
-
-json g.render(item, [resolveTemplate: false])

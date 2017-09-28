@@ -1,9 +1,0 @@
-package item
-
-import eu.pierrebeitz.Item
-
-model {
-	Iterable<Item> itemList
-}
-
-json tmpl.item(itemList ?: [])
