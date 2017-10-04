@@ -5,6 +5,7 @@ import eu.pierrebeitz.onlinealbum.dto.Album;
 import eu.pierrebeitz.onlinealbum.entity.AlbumEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -17,8 +18,12 @@ public class AlbumsController {
     private AlbumRepository albumRepository;
 
     @RequestMapping(method = RequestMethod.POST)
-    public void createAlbum(@RequestParam String name, @RequestParam(required = false) String description) {
-        albumRepository.save(new AlbumEntity(name, description));
+    public void createAlbum(@RequestParam String name,
+                            @RequestParam(required = false) String description,
+                            @RequestParam(required = false) MultipartFile image) {
+        // TODO: save image in statics, retrieve the static path
+        String imageStaticPath = "";
+        albumRepository.save(new AlbumEntity(name, description, imageStaticPath));
     }
 
     @RequestMapping(method = RequestMethod.GET)

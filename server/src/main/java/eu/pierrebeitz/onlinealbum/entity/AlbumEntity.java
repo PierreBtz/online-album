@@ -9,14 +9,16 @@ public class AlbumEntity {
     @Id
     private String name;
     private String description;
+    private String imageStaticPath;
 
     public AlbumEntity() {
         // used by JPA
     }
 
-    public AlbumEntity(String name, String description) {
+    public AlbumEntity(String name, String description, String imageStaticPath) {
         this.name = name;
         this.description = description;
+        this.imageStaticPath = imageStaticPath;
     }
 
     public String getName() {
@@ -33,5 +35,13 @@ public class AlbumEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setImageStaticPath(String imageStaticPath) {
+        this.imageStaticPath = imageStaticPath;
+    }
+
+    public String getImageStaticPath() {
+        return imageStaticPath;
     }
 }

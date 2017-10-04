@@ -13,17 +13,24 @@ class AddAlbum extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {name: '', description: ''};
+        this.state = {
+            name: '',
+            description: '',
+            imagePath: ''
+        };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
         const target = event.target;
+        // TODO improve this
         if (target.id === 'name') {
             this.setState({name: target.value});
         } else if (target.id === 'description') {
             this.setState({description: target.value});
+        } else if (target.id === 'imagePath') {
+            this.setState({imagePath: target.value});
         }
     }
 
@@ -52,6 +59,7 @@ class AddAlbum extends Component {
 
     render() {
         const classes = this.props.classes;
+        /*TODO Replace the textfield by a file chooser*/
         return (
             <form onSubmit={this.handleSubmit}>
                 <FormLabel>
@@ -63,6 +71,12 @@ class AddAlbum extends Component {
                 <FormLabel>
                     Description:
                     <TextField id="description" type="text" color="primary" value={this.state.description}
+                               onChange={this.handleChange}/>
+                </FormLabel>
+                <br/>
+                <FormLabel>
+                    Image path:
+                    <TextField id="imagePath" type="text" color="primary" value={this.state.imagePath}
                                onChange={this.handleChange}/>
                 </FormLabel>
                 <br/>

@@ -6,6 +6,7 @@ public class Album {
 
     private String name;
     private String description;
+    private String imageStaticPath;
 
     public Album() {
     }
@@ -13,6 +14,7 @@ public class Album {
     public Album(AlbumEntity album) {
         name = album.getName();
         description = album.getDescription();
+        imageStaticPath = album.getImageStaticPath();
     }
 
     public String getName() {
@@ -29,5 +31,13 @@ public class Album {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImageStaticPath() {
+        return imageStaticPath;
+    }
+
+    public void setImageStaticPath(String imageStaticPath) {
+        this.imageStaticPath = imageStaticPath;
     }
 }
